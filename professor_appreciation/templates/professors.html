@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>교수 목록</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+</head>
+<body>
+    <h1>교수 목록</h1>
+    <div class="card-container">
+        {% for professor in professors %}
+        <div class="card">
+            <h3>{{ professor.name }}</h3>
+            <p>{{ professor.department }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

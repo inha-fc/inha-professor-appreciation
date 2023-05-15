@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>스승의날 홈페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/bootstrap-5.3.0-alpha3/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/fontawesome-free-6.4.0-web/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+    
+    <style>
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 128px;
+            margin-top: 5vh;
+        }
+        
+        .logo-container .logo {
+            width: 128px;
+            height: 128px;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .progress-bar {
+            background-color: #888;
+        }
+
+        .dark-mode .progress-bar {
+            background-color: #fff;
+        }
+        
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            color: #888;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .dark-mode-toggle:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <object class="logo" data="{{ url_for('static', filename='svgs/inha_logo.svg') }}" type="image/svg+xml"></object>
+        </div>
+        <h1 class="page-title">💐 교수님 감사합니다! 💌</h1>
+    </div>
+    
+    <div class="card-container">
+        {% for professor in professors %}
+        <div class="card">
+            <h3>{{ professor.name }}</h3>
+            <p>{{ professor.department }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="progress-container fixed-top">
+        <div class="progress-bar" id="audio-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+        <button type="button" class="toggle-button" id="toggle-button"><i class="fas fa-play"></i></button>
+    </div>
+    
+    <audio class="audio-player" src="{{ url_for('static', filename='audio/background.mp3') }}" loop controls id="audio-player"></audio>
+    <button type="button" class="dark-mode-toggle"><i class="far fa-moon"></i></button>
+
+    <script src="{{ url_for('static', filename='lib/bootstrap-5.3.0-alpha3/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/fontawesome-free-6.4.0-web/js/all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+    <script>
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.querySelector('body');
+
+        darkModeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
